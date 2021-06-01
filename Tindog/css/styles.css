@@ -1,0 +1,129 @@
+body{
+    font-family: 'Montserrat', sans-serif;
+}
+#title{
+    background-color:#ff4c68;
+    color:white;
+}
+.container-fluid{
+    padding: 3% 15% 7%;
+}
+/* navigation bar  */
+.navbar{
+        padding: 0 0 4.5rem;
+}
+.brand-nav{
+    font-family:"Ubunto";
+    font-size:100px;
+}
+.nav-item{
+    padding:0 18px;
+}
+.nav-link{
+    font-size:1.5rem;
+    font-weight:400;
+    font-family:'Montserrat', sans-serif;
+
+}
+/* Download buttons */
+.download-button{
+    margin: 5% 3% 5% 0%;
+}
+/* Title image  */
+.title-image{
+    width: 16%;
+    transform: rotate(20deg);
+    z-index: 0;
+    position:absolute;
+}
+/* Feature */
+#features{
+    background-color:#fff;
+    position: relative;
+    z-index: 1;
+}
+h3{
+    text-align: center;
+    font-size: 2rem;
+    font-weight:600;
+}
+.feature-text{
+    text-align: center;
+    color:#687980;
+    font-weight: 525;
+}
+.icon{
+    color:#f08393;
+}
+.icon:hover{
+    color:#ff4c68;
+}
+.feature-box{
+    text-align: center;
+    padding:5%;
+}
+i{
+    padding-bottom: 10%;
+}
+/* Testimonial */
+h2{
+    font-weight: 600;
+    font-family: "Montserrat";
+    line-height:1.5;
+}
+#testimonials{
+    color:white;
+    background-color:#f08393;
+    /* padding:8% 15%; */
+    text-align: center;
+    font-weight: 600;
+    line-height:1.5;
+}
+.testimonial-image{
+    width: 10%;
+    border-radius:100%;
+    margin:20px;
+}
+#press{
+    text-align: center;
+    background-color:#f08393;
+    padding-bottom: 4%;
+}
+.press-logo{
+    width:15%;
+    margin:20px 20px 50px;
+}
+.carousel-item{
+    padding:7% 15%;
+}
+#pricing{
+    padding: 100px;
+}
+.padding-column{
+    padding:3% 5%;
+    margin:2%;
+}
+.card{
+    padding:12px;
+}
+/* CTA  */
+#cta{
+    text-align: center;
+    background-color:#ff4c68;
+    color:#fff;
+    padding: 7% 15%;
+}
+.cta-heading{
+    font-family:"Montserrat";
+    font-weight: 600;
+    line-height:1.5;
+    font-size: 4rem;
+}
+#footer{
+    padding:3% 15%;
+    text-align: center;
+}
+.footer-icon{
+    padding: 2% 5%;
+    color: #ff4c68;
+}
