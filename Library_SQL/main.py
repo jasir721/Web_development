@@ -1,0 +1,82 @@
+from flask import Flask, render_template, request, redirect, url_for, session
+import sqlite3
+from flask_sqlalchemy import SQLAlchemy
+
+app = Flask(__name__)
+# Creating the database
+app.config['SQLALCHEMY_DATABASE_URI'] = "sqlite:///books.db"
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+# This line is only to turn off the modification in the deskktop
+db = SQLAlchemy(app)
+
+
+# SQL Structured Query Language
+# sqlite3 is an databse management system and the most popular one
+# We created a database called books
+# db = sqlite3.connect("books-collection.db")
+# Now we need to create a cursor which will control our database
+# cursor=db.cursor()
+# cursor.execute("CREATE TABLE books (id INTEGER PRIMARY KEY, title varchar(250) NOT NULL UNIQUE, author varchar(250) NOT NULL, rating FLOAT NOT NULL)")
+# Primary key would be uniquely identifiable in the computer
+# Varchar variable length
+# unique- no two records must be same in that column
+# cursor.execute("INSERT INTO books VALUES(1, 'Harry Potter', 'J. K. Rowling', '9.3')")
+# db.commit()
+
+class Book(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    title = db.Column(db.String(250), unique=True, nullable=False)
+    author = db.Column(db.String(250), nullable=False)
+    rating = db.Column(db.Float, nullable=False)
+
+
+db.create_all()
+
+
+@app.route('/')
+def home():
+    all_books = db.session.query(Book).all()
+    return render_template("index.html", books=all_books)
+
+
+@app.route("/add", methods=["GET", "POST"])
+def add():
+    if request.method == "POST":
+        new_book = Book(
+            title=request.form["title"],
+            author=request.form["author"],
+            rating=request.form["rating"]
+        )
+        db.session.add(new_book)
+        db.session.commit()
+        # all_books.append(new_book)
+        return redirect(url_for('home'))
+    return render_template("add.html")
+
+
+@app.route("/edit", methods=["GET", "POST"])
+def edit():
+    if request.method == "POST":
+        # To update record
+        book_id = request.form["id"]
+        book_to_update = Book.query.get(book_id)
+        book_to_update.rating = request.form["rating"]
+        db.session.commit()
+        return redirect(url_for('home'))
+    book_id = request.args.get('id')
+    book_selected = Book.query.get(book_id)
+    return render_template("change_rating.html", book=book_selected)
+
+
+@app.route("/delete")
+def delete():
+    book_id = request.args.get('id')
+    book_to_delete = Book.query.get(book_id)
+    db.session.delete(book_to_delete)
+    db.session.commit()
+    return redirect(url_for("home"))
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
